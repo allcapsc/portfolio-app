@@ -2,7 +2,9 @@ import LINKS from '@/links'
 
 export default function SocialLinks() {
   return (
-    <div className="mt-10 grid grid-cols-2 gap-4">
+    <div className="mt-10">
+      <h3 className="font-heading mb-8 text-2xl sm:text-3xl">Connect</h3>
+      <div className="grid grid-cols-2 gap-4">
       {Object.keys(LINKS).map((key) => (
         <a
           className="border-border shadow-shadow text-main-foreground rounded-base bg-main hover:translate-x-boxShadowX hover:translate-y-boxShadowY border-2 p-4 transition-all hover:shadow-none hover:scale-[1.02] active:scale-95"
@@ -23,6 +25,7 @@ export default function SocialLinks() {
           </p>
         </a>
       ))}
+      </div>
     </div>
   )
 }
