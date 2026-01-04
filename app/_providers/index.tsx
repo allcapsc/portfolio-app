@@ -1,5 +1,5 @@
-import { Snowfall } from "@/components/snow-fall";
-import { ThemeProvider } from "@/components/theme-provider";
+import { Snowfall } from "@/components/effects/snow-fall";
+import { ThemeProvider } from "@/components/features/theme-provider";
 
 export default function Providers({
     children,
@@ -12,7 +12,7 @@ export default function Providers({
             defaultTheme="dark"
             enableSystem
             disableTransitionOnChange
-        ><Snowfall/>{children}
+        >{children}
         </ThemeProvider>
     );
 }

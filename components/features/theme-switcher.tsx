@@ -11,7 +11,7 @@ export function ThemeSwitcher() {
   return (
     <>
       <button
-        className="border-border bg-secondary-background mt-6 size-11 border-2 p-0"
+        className="border-border bg-secondary-background size-11 border-2 p-0 transition-all hover:bg-main hover:scale-105 active:scale-95 rounded-base shadow-shadow hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none"
         onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
       >
         <Sun className="stroke-foreground hidden size-6 dark:inline" />

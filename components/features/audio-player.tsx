@@ -23,8 +23,8 @@ function AudioPlayer() {
   };
 
   return (
-    <div className="mt-6">
-      <div className="border-border shadow-shadow text-main-foreground rounded-base bg-main border-2 p-5 transition-all flex items-center justify-between">
+    <div className="flex-1">
+      <div className="border-border shadow-shadow text-main-foreground rounded-base bg-main border-2 p-5 flex items-center justify-between">
         <div>
           <div className="flex items-center gap-2">
             <h2 className="font-heading text-lg sm:text-xl">The Aux Cord</h2>
