@@ -1,22 +1,23 @@
-import { ThemeSwitcher } from '@/components/features/theme-switcher'
 import AudioPlayer from '@/components/features/audio-player'
 import Hero from '@/components/home/hero'
 import SocialLinks from '@/components/home/social-links'
 import Projects from '@/components/home/projects'
+import Navigation from '@/components/home/navigation'
 
 export default function Home() {
   return (
-    <div className="text-foreground relative mx-auto h-full w-[700px] max-w-full p-8 md:p-16 xl:w-[1400px]">
-      <div className="mb-16 w-full xl:fixed xl:mb-0 xl:w-[500px]">
-        <Hero />
-        <div className="mt-8 flex items-center gap-4">
-          <AudioPlayer />
-          <ThemeSwitcher />
+    <div className="text-foreground relative mx-auto min-h-screen w-full max-w-7xl p-8 md:p-16">
+      <Navigation />
+      
+      <div className="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+        {/* Left Column - Hero Section */}
+        <div className="lg:sticky lg:top-16 space-y-6">
+          <Hero />
+          <SocialLinks />
         </div>
-        <SocialLinks />
-      </div>
-      <div className="justify-end xl:flex">
-        <div className="w-full xl:w-1/2 xl:pb-16">
+        
+        {/* Right Column - Projects */}
+        <div id="projects">
           <Projects />
         </div>
       </div>

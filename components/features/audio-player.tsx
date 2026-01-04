@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useRef } from "react";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
   PlayIcon,
@@ -23,7 +22,7 @@ function AudioPlayer() {
   };
 
   return (
-    <div className="flex-1">
+    <div className="w-full">
       <div className="border-border shadow-shadow text-main-foreground rounded-base bg-main border-2 p-5 flex items-center justify-between">
         <div>
           <div className="flex items-center gap-2">
@@ -32,13 +31,17 @@ function AudioPlayer() {
           </div>
           <p className="font-base mt-1 text-sm sm:text-base">A taste of my music collection</p>
         </div>
-        <Button variant="ghost" size="icon" onClick={handlePlayPause}>
+        <button 
+          onClick={handlePlayPause}
+          className="border-border shadow-shadow rounded-base border-2 p-2 bg-background text-foreground hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none transition-all active:scale-95"
+          aria-label={isPlaying ? "Pause" : "Play"}
+        >
           {isPlaying ? (
             <PauseIcon className="w-5 h-5" />
           ) : (
             <PlayIcon className="w-5 h-5" />
           )}
-        </Button>
+        </button>
         <audio
           ref={audioRef}
           src="https://radio.onekeyclick.com/listen/taste/radio.mp3"

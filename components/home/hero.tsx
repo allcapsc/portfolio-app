@@ -1,10 +1,14 @@
+import AudioPlayer from '@/components/features/audio-player'
+
 export default function Hero() {
   return (
     <div className="mt-8">
-      <h2 className="font-heading text-3xl sm:text-[44px] mb-2">Edgar Sanchez</h2>
-      <p className="font-base mt-8 text-base sm:text-xl leading-relaxed">
-        Software Engineer. Passionate about building web applications and exploring new technologies.
+      <h1 className="font-heading text-4xl sm:text-5xl mb-4">Edgar Sanchez</h1>
+      <h2 className="font-heading text-xl sm:text-2xl mb-6 opacity-90">Mechanical Engineer</h2>
+      <p className="font-base text-base sm:text-lg leading-relaxed mb-8 max-w-md">
+        I'm passionate about crafting efficient solutions through code and engineering principles.
       </p>
+      <AudioPlayer />
     </div>
   )
 }
