@@ -1,0 +1,51 @@
+"use client";
+
+import React, { useState, useRef } from "react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import {
+  PlayIcon,
+  PauseIcon,
+} from "lucide-react";
+
+function AudioPlayer() {
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  const handlePlayPause = () => {
+    if (isPlaying) {
+      audioRef.current?.pause();
+      setIsPlaying(false);
+    } else {
+      audioRef.current?.play();
+      setIsPlaying(true);
+    }
+  };
+
+  return (
+    <div className="mt-6">
+      <div className="border-border shadow-shadow text-main-foreground rounded-base bg-main border-2 p-5 transition-all flex items-center justify-between">
+        <div>
+          <div className="flex items-center gap-2">
+            <h2 className="font-heading text-lg sm:text-xl">My Music Taste</h2>
+            <Badge variant="destructive" className="text-xs px-1.5 py-0.5 h-5">LIVE</Badge>
+          </div>
+          <p className="font-base mt-1 text-sm sm:text-base">Listen to my taste in music</p>
+        </div>
+        <Button variant="ghost" size="icon" onClick={handlePlayPause}>
+          {isPlaying ? (
+            <PauseIcon className="w-5 h-5" />
+          ) : (
+            <PlayIcon className="w-5 h-5" />
+          )}
+        </Button>
+        <audio
+          ref={audioRef}
+          src="https://radio.onekeyclick.com/listen/taste/radio.mp3"
+        />
+      </div>
+    </div>
+  );
+}
+
+export default AudioPlayer

@@ -1,5 +1,6 @@
 import LINKS from '@/links'
 import { ThemeSwitcher } from '@/components/theme-switcher'
+import AudioPlayer from '@/components/audio-player'
 
 export default function Home() {
   return (
@@ -12,6 +13,8 @@ export default function Home() {
             Software Engineer. Passionate about building web applications and exploring new technologies.
           </p>
         </div>
+
+        <AudioPlayer />
 
         <ThemeSwitcher />
       </div>
