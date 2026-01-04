@@ -25,19 +25,14 @@ function AudioPlayer() {
   return (
     <div className="flex-1">
       <div className="border-border shadow-shadow text-main-foreground rounded-base bg-main border-2 p-5 flex items-center justify-between">
-        <div className="flex-1">
+        <div>
           <div className="flex items-center gap-2">
             <h2 className="font-heading text-lg sm:text-xl">The Aux Cord</h2>
-            <Badge variant="destructive" className="text-xs px-2 py-0.5 h-5">LIVE</Badge>
+            <Badge variant="destructive" className="text-xs px-1.5 py-0.5 h-5">LIVE</Badge>
           </div>
-          <p className="font-base mt-1.5 text-sm opacity-90">A taste of my music collection</p>
+          <p className="font-base mt-1 text-sm sm:text-base">A taste of my music collection</p>
         </div>
-        <Button 
-          variant="ghost" 
-          size="icon" 
-          onClick={handlePlayPause}
-          className="hover:scale-110 transition-transform ml-2"
-        >
+        <Button variant="ghost" size="icon" onClick={handlePlayPause}>
           {isPlaying ? (
             <PauseIcon className="w-5 h-5" />
           ) : (
