@@ -19,7 +19,7 @@ export function ThemeSwitcher() {
         className="hover:opacity-70 transition-opacity"
         aria-label="Toggle theme"
       >
-        <Sun className="stroke-foreground size-8" />
+        <Sun className="stroke-foreground size-8 cursor-pointer" />
       </button>
     )
   }
@@ -31,9 +31,9 @@ export function ThemeSwitcher() {
       aria-label="Toggle theme"
     >
       {theme === 'dark' ? (
-        <Moon className="stroke-foreground size-8" />
+        <Moon className="stroke-foreground size-8 cursor-pointer" />
       ) : (
-        <Sun className="stroke-foreground size-8" />
+        <Sun className="stroke-foreground size-8 cursor-pointer" />
       )}
     </button>
   )

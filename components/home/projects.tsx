@@ -32,14 +32,14 @@ export default function Projects() {
                 {project.link ? (
                   <button
                     onClick={() => window.open(project.link, '_blank')}
-                    className="border-border shadow-shadow rounded-base border-2 px-4 py-2 font-base text-sm sm:text-base hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none transition-all active:scale-95 inline-flex items-center gap-2 bg-background text-foreground"
+                    className="border-border shadow-shadow rounded-base border-2 px-4 py-2 font-base text-sm sm:text-base hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none transition-all active:scale-95 inline-flex items-center gap-2 bg-background text-foreground cursor-pointer"
                   >
                     Learn More <FaArrowRight className="w-3 h-3" />
                   </button>
                 ) : project.github ? (
                   <button
                     onClick={() => window.open(project.github, '_blank')}
-                    className="border-border shadow-shadow rounded-base border-2 px-4 py-2 font-base text-sm sm:text-base hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none transition-all active:scale-95 inline-flex items-center gap-2 bg-background text-foreground"
+                    className="border-border shadow-shadow rounded-base border-2 px-4 py-2 font-base text-sm sm:text-base hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none transition-all active:scale-95 inline-flex items-center gap-2 bg-background text-foreground cursor-pointer"
                   >
                     GitHub <FaArrowRight className="w-3 h-3" />
                   </button>
