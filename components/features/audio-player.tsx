@@ -45,6 +45,7 @@ function AudioPlayer() {
         <audio
           ref={audioRef}
           src="https://radio.onekeyclick.com/listen/taste/radio.mp3"
+          preload="none"
         />
       </div>
     </div>
