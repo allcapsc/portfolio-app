@@ -17,14 +17,18 @@ function AudioPlayer() {
   useEffect(() => {
     // Listen for messages from popup window
     const handleMessage = (event: MessageEvent) => {
-      if (event.data.type === 'PLAY_PAUSE') {
-        handlePlayPause();
-      } else if (event.data.type === 'REQUEST_STATE') {
-        // Send current state to popup
-        popupRef.current?.postMessage({
-          type: 'STATE_UPDATE',
-          isPlaying
-        }, '*');
+      if (event.data.type === 'STATE_UPDATE') {
+        setIsPlaying(event.data.isPlaying);
+        // Stop local audio when popup is playing
+        if (event.data.isPlaying && audioRef.current) {
+          audioRef.current.pause();
+        }
+      } else if (event.data.type === 'POPUP_READY') {
+        setIsPlaying(event.data.isPlaying);
+        // Stop local audio when popup opens
+        if (audioRef.current) {
+          audioRef.current.pause();
+        }
       }
     };
 
@@ -35,6 +39,7 @@ function AudioPlayer() {
       if (popupRef.current && popupRef.current.closed) {
         popupRef.current = null;
         setIsPopupOpen(false);
+        setIsPlaying(false);
       }
     }, 1000);
 
@@ -42,19 +47,21 @@ function AudioPlayer() {
       window.removeEventListener('message', handleMessage);
       clearInterval(interval);
     };
-  }, [isPlaying]);
+  }, []);
 
   const handlePlayPause = () => {
-    if (isPlaying) {
-      audioRef.current?.pause();
-      setIsPlaying(false);
-      // Notify popup of state change
-      popupRef.current?.postMessage({ type: 'STATE_UPDATE', isPlaying: false }, '*');
+    if (popupRef.current && !popupRef.current.closed) {
+      // If popup is open, send command to it
+      popupRef.current.postMessage({ type: 'PLAY_PAUSE' }, '*');
     } else {
-      audioRef.current?.play();
-      setIsPlaying(true);
-      // Notify popup of state change
-      popupRef.current?.postMessage({ type: 'STATE_UPDATE', isPlaying: true }, '*');
+      // Play locally on the page
+      if (isPlaying) {
+        audioRef.current?.pause();
+        setIsPlaying(false);
+      } else {
+        audioRef.current?.play();
+        setIsPlaying(true);
+      }
     }
   };
 
@@ -63,6 +70,12 @@ function AudioPlayer() {
     if (popupRef.current && !popupRef.current.closed) {
       popupRef.current.focus();
       return;
+    }
+
+    // Pause local audio before opening popup
+    const wasPlaying = isPlaying;
+    if (audioRef.current) {
+      audioRef.current.pause();
     }
 
     // Create popup window with specific dimensions
@@ -81,9 +94,11 @@ function AudioPlayer() {
       popupRef.current = popup;
       setIsPopupOpen(true);
       
-      // Send initial state after popup loads
+      // Transfer playback state to popup
       setTimeout(() => {
-        popup.postMessage({ type: 'STATE_UPDATE', isPlaying }, '*');
+        if (wasPlaying) {
+          popup.postMessage({ type: 'PLAY_PAUSE' }, '*');
+        }
       }, 500);
     }
   };
@@ -123,12 +138,14 @@ function AudioPlayer() {
           </div>
         </div>
       )}
-      {/* Audio element always stays in DOM */}
-      <audio
-        ref={audioRef}
-        src="https://radio.onekeyclick.com/listen/taste/radio.mp3"
-        preload="none"
-      />
+      {/* Audio element for local playback */}
+      {!isPopupOpen && (
+        <audio
+          ref={audioRef}
+          src="https://radio.onekeyclick.com/listen/taste/radio.mp3"
+          preload="none"
+        />
+      )}
     </>
   );
 }
