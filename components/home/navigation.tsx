@@ -7,12 +7,15 @@ export default function Navigation() {
         <ThemeSwitcher />
       </div>
       <div className="flex items-center gap-6">
-        <a href="/" className="font-base text-sm sm:text-base hover:text-main transition-colors">
-          Home
+        {/* <a href="#about" className="font-base text-sm sm:text-base hover:text-main transition-colors">
+          About
         </a>
-        <a href="/drawing" className="font-base text-sm sm:text-base hover:text-main transition-colors">
-          Drawing
+        <a href="#projects" className="font-base text-sm sm:text-base hover:text-main transition-colors">
+          Projects
         </a>
+        <a href="#experience" className="font-base text-sm sm:text-base hover:text-main transition-colors">
+          Experience
+        </a> */}
         <a 
           href="/resume" 
           target="_blank"

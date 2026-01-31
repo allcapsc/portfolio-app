@@ -1,55 +1,36 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
 import { PlayIcon, PauseIcon } from "lucide-react";
 
 export default function AudioPlayerPopup() {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    // Listen for commands from main window
+    // Listen for state updates from main window
     const handleMessage = (event: MessageEvent) => {
-      if (event.data.type === 'PLAY_PAUSE') {
-        handlePlayPause();
-      } else if (event.data.type === 'REQUEST_STATE') {
-        // Send current state back to main window
-        if (window.opener) {
-          window.opener.postMessage({ 
-            type: 'STATE_UPDATE', 
-            isPlaying 
-          }, '*');
-        }
+      if (event.data.type === 'STATE_UPDATE') {
+        setIsPlaying(event.data.isPlaying);
       }
     };
 
     window.addEventListener('message', handleMessage);
 
-    // Notify main window when loaded
+    // Request initial state from parent window
     if (window.opener) {
-      window.opener.postMessage({ 
-        type: 'POPUP_READY',
-        isPlaying 
-      }, '*');
+      window.opener.postMessage({ type: 'REQUEST_STATE' }, '*');
     }
 
     return () => {
       window.removeEventListener('message', handleMessage);
     };
-  }, [isPlaying]);
+  }, []);
 
   const handlePlayPause = () => {
-    if (isPlaying) {
-      audioRef.current?.pause();
-      setIsPlaying(false);
-      // Notify main window
-      window.opener?.postMessage({ type: 'STATE_UPDATE', isPlaying: false }, '*');
-    } else {
-      audioRef.current?.play();
-      setIsPlaying(true);
-      // Notify main window
-      window.opener?.postMessage({ type: 'STATE_UPDATE', isPlaying: true }, '*');
+    // Send play/pause command to main window
+    if (window.opener) {
+      window.opener.postMessage({ type: 'PLAY_PAUSE' }, '*');
     }
   };
 
@@ -77,11 +58,6 @@ export default function AudioPlayerPopup() {
           </button>
         </div>
       </div>
-      <audio
-        ref={audioRef}
-        src="https://radio.onekeyclick.com/listen/taste/radio.mp3"
-        preload="none"
-      />
     </div>
   );
 }
