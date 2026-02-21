@@ -1,4 +1,3 @@
-import AudioPlayer from '@/components/features/audio-player'
 
 export default function Hero() {
   return (
@@ -8,7 +7,6 @@ export default function Hero() {
       <p className="font-base text-base sm:text-lg leading-relaxed mb-8 max-w-md">
         I'm passionate about crafting efficient solutions through code and engineering principles.
       </p>
-      <AudioPlayer />
     </div>
   )
 }

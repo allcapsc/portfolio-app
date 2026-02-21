@@ -1,4 +1,3 @@
-import AudioPlayer from '@/components/features/audio-player'
 import Hero from '@/components/home/hero'
 import SocialLinks from '@/components/home/social-links'
 import Projects from '@/components/home/projects'
